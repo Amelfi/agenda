@@ -66,11 +66,11 @@
     $daycount=1;
     $nextday=1;
 
-    $eventQuery="SELECT DATE_FORMAT(date, '%d%m%Y') as datearray, events.name, categories.name as category, icon, date 
+   $eventQuery="SELECT DATE_FORMAT(date, '%d%m%Y') as datearray, events.name, categories.name as category, icon, date 
     FROM events, categories 
-    WHERE categories.id=cat 
-    -- and
-    -- date between '$from' and '$to' 
+    WHERE categories.Id=events.cat 
+    and
+     date between '$from' and '$to' 
     ORDER BY date";
     $Rsevent=$con->query($eventQuery);
 

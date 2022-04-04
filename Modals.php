@@ -2,10 +2,12 @@
 <div class="modal fade" id="NewEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form   action="insert.php" method="post">
+      <form action="insert.php" method="post">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"> <i class="icon-calendar"></i> New Event</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button"class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
           <div class="modal-body ">
               <input class="form-control form-group input-date" type="text" name="date" placeholder="Fecha">
@@ -13,13 +15,16 @@
               <div class="form-group">
                         <label for="">Categories</label>
                   <?php if(count($categories)>0):?>
-                        <Select class=" form-control">
+                    
+                        <select name="categories" class=" form-control">
                           <?php foreach ($categories as $cat): ?>
                           
-                            <option name="categories"  value=" <?="$cat->id"?>"> <?= "$cat->name"?> </option>
+                            <option   value="<?="$cat->Id"?>">
+                             <?= "$cat->name"?> 
+                            </option>
                         
                           <?php endforeach ?>
-                        </Select>
+                        </select>
                     <?php else:?>
                         <div class="alert alert-warning">No hay categorias</div>
                   <?php endif ?>                
@@ -28,8 +33,8 @@
               <input class="form-control form-group" type="text" name="name" id="">
         </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <buttom type="submit" value="save" name="save" class="btn btn-primary">Save</buttom>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" value="save" name="save" class="btn btn-primary">Save</button>
           </div>
       </form>
     </div>
