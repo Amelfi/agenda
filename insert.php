@@ -2,7 +2,7 @@
 <?php
  if(isset($_POST['save']))
  {
-   //  print_r($_POST);
+    // print_r($_POST);
     $fecha=$con->escape_string($_POST['date']);
     $tiempo=$con->escape_string($_POST['time']);
     $categoria=$con->escape_string($_POST['categories']);

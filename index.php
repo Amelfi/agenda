@@ -66,7 +66,7 @@
     $daycount=1;
     $nextday=1;
 
-   $eventQuery="SELECT DATE_FORMAT(date, '%d%m%Y') as datearray, events.name, categories.name as category, icon, date 
+   $eventQuery="SELECT  events.Id as id, DATE_FORMAT(date, '%d%m%Y') as datearray, events.name, categories.name as category, icon, DATE_FORMAT(date, '%l:%i%p') as date
     FROM events, categories 
     WHERE categories.Id=events.cat 
     and
@@ -112,7 +112,27 @@
             $('#NewEventModal .input-date').val($(this).data('date'));
             $('#NewEventModal').modal();
             });
-       
+            
+
+            $('.btn-update').on('click', function()
+            { var idevent = $(this).data('id');
+                $.ajax({
+                    url:'ajax.php',
+                    data:{id: idevent},
+                    type:'GET',
+                    datatype: 'json'
+                }).done(function(data){
+                   
+                   
+                    $('#UpdateEventModal .input-date').val(data.date);
+                    $('#UpdateEventModal .input-time').val(data.time);
+                    $('#UpdateEventModal .input-name').val(data.name);
+                    $('#UpdateEventModal .select-category').val(data.cat);
+                    $('#UpdateEventModal .input-id').val(data.Id);
+                    $('#UpdateEventModal').modal();
+                });
+               
+            });
 
         });
 
@@ -121,9 +141,9 @@
 
 </head>
 <body>
-    <pre>
-        <?php print_r ($events); ?>
-    </pre>
+    
+
+
     <div class="container">
         <h3><i class="icon-calendar"></i> Calendar Events</h3>
         <div class="row">
@@ -174,16 +194,34 @@
 
                         while($daycount <= $monthdays)
                         {
-                            echo '<td> <buttom data-date="'.$year .'-'. $month . '-' . $daycount .'" class="btn btn-sm btn-dark">'. $daycount++ .'</buttom> 
-                                
-                            <small>
-                                <ul> 
-                                    <li> </li>
+                            echo '<td> <buttom data-date="'.$year .'-'. $month . '-' . $daycount .'" class="btn btn-sm btn-dark">';
+                             echo $daycount++ ;
+                             echo '</buttom>'; 
 
-                                </ul>   
-                           </small>     
-                            </td>';
-                            $weekcount++;
+                             $index=str_pad($daycount, 2, '0', STR_PAD_LEFT ) . $month .  $year;
+                                
+                             if(isset($events[$index]))
+                             {echo  '<small>';
+                                echo '<span class="badge badge-dark float-right">' . count($events[$index])." " .'Events </span>';
+                               echo '<ul>'; 
+                                    
+                                foreach( $events[$index] as $event)
+                                {
+                                     echo '<li > <a  title="'. strtolower($event->date) ." ". $event->category .'" data-id=" '. $event->id .'" href="#" class="btn-update">';
+                                     echo' <i class=' . $event->icon . '>  </i>'  . $event->name;
+                                     echo  '</a> </li>';
+        
+                                    
+                                  }   
+
+                                   echo '</ul>';
+                                   echo '</small>';     
+                                 echo ' </td>';
+
+                                    
+                             }
+                                
+                                 $weekcount++;
 
                             if($weekcount > 7){
                                 echo '<tr></tr>';
