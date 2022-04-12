@@ -120,18 +120,27 @@
                     url:'ajax.php',
                     data:{id: idevent},
                     type:'GET',
-                    datatype: 'json'
+                    dataType: 'json'
                 }).done(function(data){
                    
-                   
+                    // console.log(data);
                     $('#UpdateEventModal .input-date').val(data.date);
                     $('#UpdateEventModal .input-time').val(data.time);
                     $('#UpdateEventModal .input-name').val(data.name);
                     $('#UpdateEventModal .select-category').val(data.cat);
                     $('#UpdateEventModal .input-id').val(data.Id);
+                    $('#UpdateEventModal .btn-remove').attr('data-event', data.Id);
                     $('#UpdateEventModal').modal();
-                });
+                }); 
                
+            });
+
+            $('.btn-remove').on('click', function(){
+
+                
+                $('#deleteEventModal .btn-delete').attr('href', 'delete.php?id=' + $(this).attr('data-event'));
+                $('#deleteEventModal').modal();
+
             });
 
         });

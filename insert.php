@@ -13,7 +13,7 @@
     $insert="INSERT INTO events (name, cat, date)  VALUES ('$nombre', '$categoria', '$dates' )";
     $con->query($insert) or exit($con_error());
     
-    $url=date('Y-m', strtotime($fecha ." ". $tiempo));
+    $url=date('m-Y', strtotime($fecha ." ". $tiempo));
 
     header('Location:index.php?month='. $url);
 

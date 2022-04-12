@@ -43,7 +43,7 @@
 
 <!-- Modal Para Insertar-->
 
-<!-- Modal Para Insertar-->
+<!-- Modal Para Actualizar-->
 <div class="modal fade" id="UpdateEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -78,6 +78,7 @@
               <input class="form-control form-group input-name" type="text" name="name" id="">
         </div>
           <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-remove" data-dismiss="modal">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" value="save" name="save" class="btn btn-primary">Edit</button>
             <input type="hidden" class="input-id" name="id">
@@ -87,4 +88,31 @@
   </div>
 </div>
 
-<!-- Modal Para Insertar-->
+<!-- Modal Para Actualizar-->
+
+<!-- Modal Para Eliminar-->
+<div class="modal fade" id="deleteEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="update.php" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1"> <i class="icon-trash"></i> Delete Event</h5>
+          <button type="button"class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body ">
+             Are you sure, You want to delete the event from the calendar?
+        </div>
+          <div class="modal-footer">
+       
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a href="#" class="btn btn-danger btn-delete">Delete</a>
+            
+          </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Eliminar-->
